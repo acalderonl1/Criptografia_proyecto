@@ -7,6 +7,10 @@
 	    margin: 10px 10px 0 0;
 	    cursor: pointer;
 	}
+	/* td {
+	    word-wrap: break-word;
+	    white-space: normal
+	} */
 	
 	html {
 	    margin: 0;

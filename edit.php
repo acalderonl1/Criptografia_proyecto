@@ -1,5 +1,6 @@
 <?php
 include("db.php");
+$platform = '';
 $username = '';
 $password = '';
 
@@ -9,6 +10,7 @@ if (isset($_GET['id'])) {
   $result = mysqli_query($conn, $query);
   if (mysqli_num_rows($result) == 1) {
     $row = mysqli_fetch_array($result);
+    $platform = $row['platform'];
     $username = $row['username'];
     $password = $row['password'];
   }
@@ -16,10 +18,12 @@ if (isset($_GET['id'])) {
 
 if (isset($_POST['update'])) {
   $id = $_GET['id'];
+
+  $platform = $_POST['platform'];
   $username = $_POST['username'];
   $password = $_POST['password'];
 
-  $query = "UPDATE tb_cuenta set username = '$username', password = '$password' WHERE id=$id";
+  $query = "UPDATE tb_cuenta set platform = '$platform', username = '$username', password = '$password' WHERE id=$id";
   mysqli_query($conn, $query);
   $_SESSION['message'] = 'Account Updated Successfully';
   $_SESSION['message_type'] = 'warning';
@@ -39,6 +43,9 @@ if(isset($_POST['back'])){
     <div class="col-md-4 mx-auto">
       <div class="card card-body">
         <form action="edit.php?id=<?php echo $_GET['id']; ?>" method="POST">
+          <div class="form-group">
+            <input name="platform" type="text" class="form-control" value="<?php echo $platform; ?>" placeholder="Update usermane">
+          </div>
           <div class="form-group">
             <input name="username" type="text" class="form-control" value="<?php echo $username; ?>" placeholder="Update usermane">
           </div>

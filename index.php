@@ -25,7 +25,7 @@
 
                         // elementos input de tipo clave
                         password1 = document.querySelector('.password1');
-                        
+
                         if (password1.type === "text") {
                             password1.type = "password"
                             showPassword.classList.remove('fa-eye-slash');
@@ -42,7 +42,10 @@
             <div class="card card-body">
                 <h5>Enter your account</h5>
                 <h5></h5>
-                <form action="save_account.php" class="input-wrapper" id="contact"  method="POST">
+                <form action="save_account.php" class="input-wrapper" id="contact" method="POST">
+                    <div class="form-group">
+                        <input type="text" name="platform" class="form-control" placeholder="Enter platform" autofocus>
+                    </div>
                     <div class="form-group">
                         <input type="text" name="username" class="form-control" placeholder="Enter username" autofocus>
                     </div>
@@ -53,15 +56,28 @@
                     <input type="Submit" class="btn btn-success btn-block" name="save_account" value="Save Account">
                 </form>
             </div>
+            <br>
+            <div class="card card-body">
+                <h5>Enter your key</h5>
+                <h5></h5>
+                <form action="save_account.php" class="input-wrapper" id="contact" method="POST">
+                    <div class="form-group">
+                        <input type="text" name="key" class="form-control" placeholder="Enter key" autofocus>
+                    </div>
+
+                    <input type="Submit" class="btn btn-success btn-block" name="key" value="Validate key">
+                </form>
+            </div>
 
         </div>
 
 
         <div class="col-md-8">
             <h1>Accounts</h1>
-            <table class="table table-bordered">
-                <thead>
+            <table class="table table-hover table-bordered table-responsive">
+                <thead class="thead-dark">
                     <tr>
+                        <th>Platform</th>
                         <th>Username</th>
                         <th>Password</th>
                         <th>Created at</th>
@@ -76,19 +92,17 @@
 
                     while ($row = mysqli_fetch_array($result_tasks)) { ?>
                         <tr>
+                            <td><?php echo $row['platform'] ?></td>
                             <td><?php echo $row['username'] ?></td>
                             <td><?php echo $row['password'] ?></td>
                             <td><?php echo $row['create_at'] ?></td>
                             <td>
-
-                                <a href="edit.php?id=<?php echo $row['id'] ?>" class="btn btn-secondary">
+                                <a href="edit.php?id=<?php echo $row['id'] ?>" class="btn btn-secondary btn-group">
                                     <i class="far fa-edit"></i>
+                                    <a href="delete.php?id=<?php echo $row['id'] ?>" class="btn btn-danger btn-group">
+                                        <i class="far fa-trash-alt"></i>
+                                    </a>
                                 </a>
-
-                                <a href="delete.php?id=<?php echo $row['id'] ?>" class="btn btn-danger">
-                                    <i class="far fa-trash-alt"></i>
-                                </a>
-
                             </td>
                         </tr>
                     <?php } ?>
