@@ -1,3 +1,4 @@
+<!-- CREAMOS EL ARCHIVO PRINCIPAL QUE CONTENDRA TODO EL SISTEMA -->
 <?php include('db.php') ?>
 <?php include('include/heder.php') ?>
 
@@ -5,6 +6,7 @@
 <div class="container p-4">
     <div class="row">
         <div class="col-md-4">
+            <!-- CODIFICAMOS EL MANJO DE ERRORES Y CONDICIONALES Y CONFIGURACION DE ALERTAS  -->
             <?php if (isset($_SESSION['message'])) { ?>
                 <div class="alert alert-<?= $_SESSION['message_type'] ?> alert-dismissible fade show" role="alert">
                     <?= $_SESSION['message'] ?>
@@ -12,11 +14,13 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+
             <?php session_unset();
             } ?>
 
 
             <script>
+                // CREAMOS LA FUNCION PARA PODER VALIDAR EL LOGIN
                 window.addEventListener("load", function() {
 
                     // icono para mostrar contraseña
@@ -38,7 +42,7 @@
 
                 });
             </script>
-
+            <!-- CREAMOS EL SCRIPT DE HTML PARA EL FORMULARIO -->
             <div class="card card-body">
                 <h5>Enter your account</h5>
                 <h5></h5>
@@ -86,11 +90,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- SE PRESENTA LA TABLA INBOCANDO TODO DE LA BASE DE DATOS -->
                     <?php
                     $query = "SELECT * FROM tb_cuenta";
                     $result_tasks = mysqli_query($conn, $query);
 
                     while ($row = mysqli_fetch_array($result_tasks)) { ?>
+                        <!-- A MENDIDA QUE HAYA MAS DATOS VA CONSULTANDO Y CARGANDO AUTOMATICAMENTE -->
                         <tr>
                             <td><?php echo $row['platform'] ?></td>
                             <td><?php echo $row['username'] ?></td>
