@@ -1,0 +1,13 @@
+python-aes-master/
+.idea
+
+app_web/__pycache__/
+app_web/*.py[cod]
+
+app_web/*.pytest_cache
+app_web/.coverage
+
+app_web/.vscode/symbols.json
+
+
+

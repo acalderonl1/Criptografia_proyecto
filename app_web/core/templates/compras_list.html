@@ -1,0 +1,170 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block title %} Credenciales {% endblock %} 
+
+{% block content %}
+<div class="content-header row">
+        <div class="content-header-left col-12 mb-2 mt-1">
+            <div class="row breadcrumbs-top">
+                <div class="col-12">
+                    <div class="breadcrumb-wrapper col-12">
+                        <ol class="breadcrumb p-0 mb-0">
+                            <li class="breadcrumb-item"><a href="compras_list.html"><i class="bx bx-home-alt"></i></a></li>
+                            <li class="breadcrumb-item"><a href="#">Credenciales</a></li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div  id="app" class="content-body">
+        <section id="headers">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-8">
+                                <h4 class="card-title">CREDENCIALES</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container">                        
+                        <br>
+                        <div class="row">                            
+                            <div class="col-md-6 col-sm-6 col-12">
+                                <label>Clave secreta</label>
+                                <input 
+                                   required type="text" 
+                                   class="form-control" 
+                                   name="plataforma" 
+                                   value= "{$ vinicial $}"
+                                   v-model="vclave_secreta"
+                                   >
+                            </div>      
+                            <div class="col-md-3 col-sm-3 col-12">
+                                <br>
+                                <button
+                                 type="button" 
+                                 class="btn btn-success"
+                                 @click="CredencialCreate()">Validar clave</button>     
+                            </div>                                                 
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-3 col-sm-3 col-12">
+                                <label>Plataforma</label>
+                                <input 
+                                   required type="text" 
+                                   class="form-control" 
+                                   name="plataforma" 
+                                   value= "{$ vinicial $}"
+                                   v-model="vplataforma"
+                                   >
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-12">
+                                <label>Usuario</label>
+                                <input 
+                                   required type="text" 
+                                   class="form-control" 
+                                   name="usuario" 
+                                   value= "{$ vinicial $}"
+                                   v-model="vusuario"
+                                   >
+                            </div>   
+                            <div class="col-md-3 col-sm-3 col-12">
+                                <label>Contraseña</label>
+                                <input 
+                                   required type="text" 
+                                   class="form-control" 
+                                   name="contrasena" 
+                                   value= "{$ vinicial $}"
+                                   v-model="vcontrasena"
+                                   >
+                            </div>      
+                            <div class="col-md-3 col-sm-3 col-12">
+                                <br>
+                                <button type="button" class="btn btn-primary">Agregar</button>                                
+                            </div>                                                                 
+                        </div>
+                        <hr>
+                    </div>
+
+                    <div class="card-content">                        
+                        <div class="card-body">
+                       {% comment %}      <div class="col-md-3 col-sm-3 col-12">
+                                <label>Cedula</label>
+                                <input 
+                                   required type="text" 
+                                   class="form-control" 
+                                   name="cedula" 
+                                   value= "{$ vinicial $}"
+                                   v-model="vcliente"
+                                   >                
+                            </div> {% endcomment %}                            
+                            <div class="table-responsive table-wrapper-scroll-y my-custom-scrollbar">
+                                <table id="table-extended-transactions" class="table table-bordered table-striped mb-0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">Plataforma</th>
+                                            <th class="text-center">Usuario</th>
+                                            <th class="text-center">Contraseña</th>
+                                            <th class="text-center">Fecha de creación</th>
+                                            <th class="text-center">Acciones</th>                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr 
+                                          v-for="credencial in vlista_credenciales"
+                                          :key="credencial.id"
+                                          class="text-center">
+                                                <td>{$ credencial.plataforma $}</td>
+                                                <td>{$ credencial.usuario $}</td>
+                                                <td>{$ credencial.contrasena $}</td>
+                                                <td>{$ credencial.fecha_creacion $}</td>
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-primary">Ver</button>
+                                                        <button type="button" class="btn btn-primary">Editar</button>
+                                                        <button type="button" class="btn btn-danger">Eliminar</button>
+                                                      </div> 
+
+                                                </td>                                                
+                                                {% comment %} <td class="text-center">
+                                                        <select 
+                                                           name="sestado" 
+                                                           class="form-control" 
+                                                           required
+                                                           @change="vid_compra = compra.id"                                                                                                                    
+                                                           @click="CambiarEstado"
+                                                           >
+                                                        <option  
+                                                           v-for="item in vlista_estados"
+                                                           :value="item.value"
+                                                           :disabled="item.value == compra.estado"
+                                                           :selected="item.value == compra.estado"
+                                                        >
+                                                           {$ item.text $}
+                                                        </option>                                                        
+                                                    </select>
+                                                </td> {% endcomment %}
+                                        </tr>    
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+{#            </form>#}
+        </section>
+ 
+    </div>
+<div id="popup" class="modal fade" role="dialog"></div>
+
+{% block js %}
+<script type="text/javascript" src="{% static 'vue/vue.js' %}"></script>
+<script type="text/javascript" src="{% static 'vue/axios.js' %}"></script>
+<script type="text/javascript" src="{% static 'vue/apps/Compras_list-03.js' %}"></script>
+{% endblock js %}
+
+{%endblock content%}

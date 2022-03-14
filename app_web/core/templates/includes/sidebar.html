@@ -1,0 +1,18 @@
+
+<nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+    <div class="sb-sidenav-menu">
+        <div class="nav">
+            <div class="sb-sidenav-menu-heading">Core</div>
+            
+            <div class="sb-sidenav-menu-heading">Compras</div>
+            <a class="nav-link {% if 'tables' in segment %} active {% endif %}" href="compras_list.html">
+                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                Compras
+            </a>
+        </div>
+    </div>
+    <div class="sb-sidenav-footer">
+        <div class="small">Inició sesión como :</div>
+        {{ request.user.username }}
+    </div>
+</nav>

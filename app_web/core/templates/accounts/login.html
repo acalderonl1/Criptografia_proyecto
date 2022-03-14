@@ -1,0 +1,72 @@
+{% extends "layouts/base-fullscreen.html" %}
+{% load static %}
+
+{% block title %} Gestor de credenciales {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block js %}
+<script type="text/javascript" src="{% static 'vue/vue.js' %}"></script>
+<script type="text/javascript" src="{% static 'vue/axios.js' %}"></script>
+<script type="text/javascript" src="{% static 'vue/apps/chequeCreate.js' %}"></script>
+{% endblock js %}
+
+{% block content %}
+
+    <main>
+        <div class="container">
+            <div id="app" class="row justify-content-center">
+                <div class="col-lg-5">
+                    <div class="card shadow-lg border-0 rounded-lg mt-5">
+                        <div class="card-header text-center">
+                            <h3 class="text-center font-weight-light my-4">
+                                Gestor de credenciales
+                            </h3>
+                            <span class="text-center">
+                                {% if msg %}
+                                    {{ msg | safe }}
+                                {% else %}
+                                    Login
+                                {% endif %} 
+                            </span>                            
+                        </div>
+                        <div class="card-body">
+                            
+                            <form role="form" method="post" action="">
+
+                                {% csrf_token %}  
+
+                                <div class="form-group">
+                                    <label class="small mb-1" for="username">Usuario</label>
+                                    {{ form.username }}
+                                </div>
+                                <div class="form-group">
+                                    <label class="small mb-1" for="inputPassword">Contraseña</label>
+                                    {{ form.password }}
+                                </div>
+                                <div class="form-group">
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" id="rememberPasswordCheck" type="checkbox" />
+                                        <label class="custom-control-label" for="rememberPasswordCheck">Recordar contraseña</label>
+                                    </div>
+                                </div>
+                                <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+                                    <button type="submit" name="login" class="btn btn-primary">Iniciar sesión</button>
+                            </form>
+                        </div>
+                        <div class="card-footer text-center">
+                            <div class="small">
+                                Ups - Proyecto criptografía.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
